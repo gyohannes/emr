@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  art_patient: one
+  referred_from: MyString
+  department: one
+  outside_referral_type: MyString
+
+two:
+  art_patient: two
+  referred_from: MyString
+  department: two
+  outside_referral_type: MyString

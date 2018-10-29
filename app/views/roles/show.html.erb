@@ -1,0 +1,17 @@
+<div class="panel-heading">
+  Role Details
+</div>
+<div class="panel-body">
+<p>
+  <strong>Name:</strong>
+  <%= @role.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @role.description %>
+</p>
+<hr/>
+<%= link_to 'Edit', edit_role_path(@role) %> |
+<%= link_to 'Back', roles_path %>
+</div>

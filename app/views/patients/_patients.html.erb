@@ -1,0 +1,35 @@
+<table class="table table-hover js-exportable dataTable">
+  <thead>
+  <tr>
+    <th>MRN</th>
+    <th>First name</th>
+    <th>Father name</th>
+    <th>Grand father name</th>
+    <th>Mother first name</th>
+    <th>Gender</th>
+    <th>Date of birth</th>
+    <th>Mobile Telephone</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @patients.each do |patient| %>
+      <tr>
+        <td><%= patient.mrn %></td>
+        <td><%= patient.first_name %></td>
+        <td><%= patient.father_name %></td>
+        <td><%= patient.grand_father_name %></td>
+        <td><%= patient.mother_first_name %></td>
+        <td><%= patient.gender %></td>
+        <td><%= patient.date_of_birth %></td>
+        <td><%= patient.mobile_telephone %></td>
+        <td>
+          <%= link_to 'Details', patient %> |
+          <%= link_to 'Edit', edit_patient_path(patient) %> |
+          <%= link_to 'Delete', patient, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

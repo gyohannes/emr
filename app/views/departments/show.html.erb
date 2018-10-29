@@ -1,0 +1,17 @@
+<div class="panel-heading">
+  Department Details
+</div>
+<div class="panel-body">
+<p>
+  <strong>Name:</strong>
+  <%= @department.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @department.description %>
+</p>
+<hr/>
+<%= link_to 'Edit', edit_department_path(@department) %> |
+<%= link_to 'Back', departments_path %>
+</div>

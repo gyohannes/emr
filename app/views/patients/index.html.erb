@@ -1,0 +1,40 @@
+<%= content_for :header do %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Search / Create Patient
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <%= simple_form_for :patient_search, url: create_from_search_patients_path do |f| %>
+              <div class="col-sm-9">
+                <table width="100%">
+                  <tr>
+                    <th><%= f.input :MRN, label: false, placeholder: 'MRN' %></th>
+                    <th><%= f.input :phone_number, label: false, placeholder: 'Phone Number' %></th>
+                    <th><%= f.input :age, as: :string, label: false, placeholder: 'Age' %></th>
+                  </tr>
+                  <tr>
+                    <th><%= f.input :first_name, label: false, placeholder: 'First Name' %></th>
+                    <th><%= f.input :father_name, label: false, placeholder: 'Father Name' %></th>
+                    <th><%= f.input :grand_father_name, label: false, placeholder: 'Grand Father Name' %></th>
+                  </tr>
+                </table>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-actions">
+                  <%= f.button :submit, 'Register New Patient', class: 'btn btn-primary btn-raised' %>
+                </div>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+<% end %>
+
+<div class="panel-body">
+  <div id="patients_list">
+    <%= render 'patients' %>
+  </div>
+  <hr/>
+
+</div>

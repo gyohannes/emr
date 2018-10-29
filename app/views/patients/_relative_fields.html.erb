@@ -1,0 +1,9 @@
+<table id="relatives" width="100%" %>
+  <%= f.simple_fields_for :relatives, :wrapper => false do |relative_form| %>
+      <tr class="fields">
+        <td><%= relative_form.input :name, placeholder: 'Relative Name', label: false %></td>
+        <td><%= relative_form.input :relationship, placeholder: 'Relationship', label: false %></td>
+        <td><%= relative_form.input :phone, placeholder: 'Phone', label: false %></td>
+      </tr>
+  <% end %>
+</table>

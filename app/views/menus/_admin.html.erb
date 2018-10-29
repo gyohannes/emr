@@ -1,0 +1,58 @@
+<% if user_signed_in? and current_user.admin? %>
+    <li>
+      <a href="javascript:void(0);" class="menu-toggle">
+        <i class="material-icons">group</i>
+        <span class="nav-label">User Management</span>
+      </a>
+      <ul>
+        <li>
+          <%= link_to 'Users',users_path %>
+        </li>
+        <li>
+          <%= link_to 'Roles',roles_path %>
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      <a href="javascript:void(0);" class="menu-toggle">
+        <i class="material-icons">settings</i>
+        <span class="nav-label">Settings</span>
+      </a>
+      <ul>
+        <li>
+          <%= link_to 'Departments',departments_path %>
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      <a href="javascript:void(0);" class="menu-toggle">
+        <i class="material-icons">category</i>
+        <span class="nav-label">Organization Structure</span>
+      </a>
+      <ul>
+        <li>
+          <%= link_to 'Organization Structure Types', organization_structure_types_path %>
+        </li>
+        <li>
+          <%= link_to 'Organization Structures', organization_structures_path %>
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      <a href="javascript:void(0);" class="menu-toggle">
+        <i class="material-icons">local_hospital</i>
+        <span class="nav-label">Facilities</span>
+      </a>
+      <ul>
+        <li>
+          <%= link_to 'Facility Types', facility_types_path %>
+        </li>
+        <li>
+          <%= link_to 'Facilities', facilities_path %>
+        </li>
+      </ul>
+    </li>
+<% end %>

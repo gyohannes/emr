@@ -1,0 +1,17 @@
+<div class="panel-heading">
+  Organization Strructure Type Details
+</div>
+<div class="panel-body">
+<p>
+  <strong>Name:</strong>
+  <%= @organization_structure_type.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @organization_structure_type.description %>
+</p>
+<hr/>
+<%= link_to 'Edit', edit_organization_structure_type_path(@organization_structure_type) %> |
+<%= link_to 'Back', organization_structure_types_path %>
+</div>

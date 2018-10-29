@@ -1,0 +1,120 @@
+<div class="panel-heading">
+  Patient Detials
+</div>
+<div class="panel-body">
+  <p>
+    <h2>MRN #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= @patient.mrn %></h2>
+  </p>
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="#personal_info" data-toggle="tab">Personal Info</a></li>
+  <li role="presentation"><a href="#address" data-toggle="tab">Address</a></li>
+  <li role="presentation"><a href="#relatives" data-toggle="tab">Relatives</a></li>
+</ul>
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane fade in active" id="personal_info">
+    <div class="row">
+      <div class="col-sm-6">
+        <p>
+          <strong>First name:</strong>
+          <%= @patient.first_name %>
+        </p>
+
+        <p>
+          <strong>Father name:</strong>
+          <%= @patient.father_name %>
+        </p>
+
+        <p>
+          <strong>Grand father name:</strong>
+          <%= @patient.grand_father_name %>
+        </p>
+
+        <p>
+          <strong>Mother first name:</strong>
+          <%= @patient.mother_first_name %>
+        </p>
+        <p>
+          <strong>Gender:</strong>
+          <%= @patient.gender %>
+        </p>
+      </div>
+      <div class="col-sm-6">
+
+        <p>
+          <strong>Date of birth:</strong>
+          <%= @patient.date_of_birth %>
+        </p>
+
+        <p>
+          <strong>Religion:</strong>
+          <%= @patient.religion %>
+        </p>
+
+        <p>
+          <strong>Education level:</strong>
+          <%= @patient.education_level %>
+        </p>
+
+        <p>
+          <strong>Occupation:</strong>
+          <%= @patient.occupation %>
+        </p>
+
+        <p>
+          <strong>Marital status:</strong>
+          <%= @patient.marital_status %>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div role="tabpanel" class="tab-pane fade" id="address">
+    <p>
+      <strong>Organization structure:</strong>
+      <%= @patient.organization_structure %>
+    </p>
+
+    <p>
+      <strong>Kebele:</strong>
+      <%= @patient.kebele %>
+    </p>
+
+    <p>
+      <strong>House number:</strong>
+      <%= @patient.house_number %>
+    </p>
+
+    <p>
+      <strong>Home telephone:</strong>
+      <%= @patient.home_telephone %>
+    </p>
+
+    <p>
+      <strong>Mobile telephone:</strong>
+      <%= @patient.mobile_telephone %>
+    </p>
+    <p>
+      <strong>work telephone:</strong>
+      <%= @patient.work_telephone %>
+    </p>
+  </div>
+  <div role="tabpanel" class="tab-pane fade" id="relatives">
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Relationship</th>
+        <th>Phone</th>
+      </tr>
+      <% @patient.relatives.each do |r| %>
+        <tr>
+          <td><%= r.name %></td>
+          <td><%= r.relationship %></td>
+          <td><%= r.phone %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <br/>
+  <%= link_to 'Edit', edit_patient_path(@patient) %> |
+  <%= link_to 'Back', patients_path %>
+</div>
+</div>

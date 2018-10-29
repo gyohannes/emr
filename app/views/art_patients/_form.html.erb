@@ -1,0 +1,92 @@
+<%= simple_nested_form_for(@art_patient,html: {id: "wizard_with_validation"}) do |f| %>
+    <h4>ART Enrollment</h4>
+    <fieldset>
+      <%= f.input :enrollment_date,as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+      <%= f.input :unique_art_number %>
+      <%= f.input :target_population_category %>
+    </fieldset>
+    <h4>Patient Identification</h4>
+    <fieldset>
+      <%= f.simple_fields_for(:patient) do |pf| %>
+      <div class='row'>
+        <div class="col-sm-6">
+          <%= pf.input :first_name %>
+          <%= pf.input :father_name %>
+          <%= pf.input :grand_father_name %>
+        </div>
+        <div class="col-sm-6">
+          <%= pf.input :gender, collection: ['Male', 'Female', 'Unknown'] %>
+          <div class="row">
+            <div class="col-sm-5">
+              <%= pf.input :date_of_birth, label: 'Birth Date', as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+            </div>
+            <div class="col-sm-1">
+              <label>Age</label>
+            </div>
+            <div class="col-sm-6">
+              <%= pf.input :years, placeholder: 'Years' %>
+              <%= pf.input :months, placeholder: 'Months' %>
+              <%= pf.input :days, placeholder: 'Days' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </fieldset>
+
+    <h4>Demographic Information</h4>
+    <fieldset>
+      <%= f.simple_fields_for(:patient) do |pf| %>
+          <%= pf.input :marital_status, collection: ['Single', 'Married', 'Divorced', 'Other'] %>
+          <%= pf.input :education_level, collection: ['Elementary', 'High School', 'Degree','Masters', 'PHD', 'Other'] %>
+          <%= pf.input :religion, collection: ['Catholic', 'Muslim', 'Protestant', 'Orthodox', "Other"] %>
+          <%= pf.input :occupation %>
+      <% end %>
+    </fieldset>
+
+    <h4>Dependents</h4>
+      <fieldset>
+        <%= render partial: 'dependent_fields', locals: {f: f}%>
+      </fieldset>
+    <h4>Patient Address</h4>
+    <fieldset>
+          <%= f.simple_fields_for(:patient) do |pf| %>
+            <div class='row'>
+              <div class="col-sm-6">
+                <%= pf.input :organization_structure_id %>
+                <%= pf.input :kebele %>
+                <%= pf.input :house_number %>
+              </div>
+              <div class="col-sm-6">
+                <%= pf.input :home_telephone %>
+                <%= pf.input :mobile_telephone %>
+                <%= pf.input :work_telephone %>
+              </div>
+            </div>
+          <% end %>
+    </fieldset>
+    <h4>Referral Information</h4>
+    <fieldset>
+      <%= f.simple_fields_for(:referral) do |rf| %>
+          <%= rf.input :referred_from, collection: [['From With-in the Facility','from_with_in'], ['From Outside the Facility','from_outside']] %>
+          <div id="referral_info"><%= render 'referred_from' %></div>
+      <% end %>
+    </fieldset>
+    <h4>Emergency Contact</h4>
+    <fieldset>
+      <%= f.simple_fields_for(:care_giver) do |cf| %>
+          <div class="row">
+            <div class="col-sm-6">
+              <%= cf.input :full_name %>
+              <%= cf.input :age %>
+              <%= cf.input :gender %>
+              <%= cf.input :relation %>
+            </div>
+            <div class="col-sm-6">
+              <%= cf.input :address_same_as_patient, input_html:{class: "filled-in chk-col-pink"} %>
+            </div>
+          </div>
+      <% end %>
+    </fieldset>
+    <%= javascript_include_tag 'referred_from' %>
+<% end %>

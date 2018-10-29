@@ -1,0 +1,31 @@
+  <div class="panel-heading">
+      Facility Types
+  </div>
+    <div class="panel-body">
+    <table class="table table-striped table-hover js-exportable dataTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @facility_types.each do |facility_type| %>
+        <tr>
+          <td><%= facility_type.name %></td>
+          <td><%= facility_type.description %></td>
+          <td>
+            <%= link_to 'Edit', edit_facility_type_path(facility_type) %> |
+            <%= link_to 'Delete', facility_type, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  <%= link_to 'New Facility Type', new_facility_type_path %>
+  </div>

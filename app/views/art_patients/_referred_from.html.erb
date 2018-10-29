@@ -1,0 +1,9 @@
+<%= simple_fields_for :art_patient,@art_patient do |f|  %>
+    <% if @referred_from == 'from_with_in' %>
+        <%= f.input :department_id, collection: @departments, class: "form-control show-tick" %>
+    <% elsif @referred_from == 'from_outside' %>
+        <%= f.input :outside_referral_type, label: 'Referred Facility Type', collection:
+            ['Health Center', 'Public Hospital','Private Hospital', 'NGO/FBO Hospital',
+             'Private Clinic', 'Self-reffered', 'Community Referred', 'Others', 'Unknown'] %>
+    <% end %>
+<% end %>

@@ -1,0 +1,17 @@
+<div class="panel-heading">
+  Facility Type Details
+</div>
+<div class="panel-body">
+<p>
+  <strong>Name:</strong>
+  <%= @facility_type.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @facility_type.description %>
+</p>
+<hr/>
+<%= link_to 'Edit', edit_facility_type_path(@facility_type) %> |
+<%= link_to 'Back', facility_types_path %>
+</div>

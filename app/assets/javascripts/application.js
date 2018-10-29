@@ -1,0 +1,16 @@
+//= require AdminBSBSenstive/plugins/jquery/dist/jquery.min
+//= require AdminBSBSenstive/plugins/jquery-ui/jquery-ui
+//= require AdminBSBSenstive/plugins/bootstrap/dist/js/bootstrap.min
+//= require rails-ujs
+//= require jquery_nested_form
+//= require bootstrap-treeview
+//= require organization_structures
+//= require users
+//= require facilities
+//= require patients
+//= require art_patients
+//= require referred_from
+//= require highcharts
+//= require chartkick
+//= require AdminBSBSenstive/index
+//= require global

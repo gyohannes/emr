@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  patient: one
+  enrollment_date: 2018-10-15
+  unique_art_number: MyString
+  target_population_category: MyString
+  mother_full_name: 
+  place_of_delivery: MyString
+  mode_of_delivery: MyString
+  care_giver_marital_status: MyString
+
+two:
+  patient: two
+  enrollment_date: 2018-10-15
+  unique_art_number: MyString
+  target_population_category: MyString
+  mother_full_name: 
+  place_of_delivery: MyString
+  mode_of_delivery: MyString
+  care_giver_marital_status: MyString
