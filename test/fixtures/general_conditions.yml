@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2018-11-07
+  art_patient: one
+  vital_signs_anrtopometry_and_functional_level: 
+  symptom_screen: MyString
+  pregnancy_status: 
+  physical_exam: 
+
+two:
+  date: 2018-11-07
+  art_patient: two
+  vital_signs_anrtopometry_and_functional_level: 
+  symptom_screen: MyString
+  pregnancy_status: 
+  physical_exam: 

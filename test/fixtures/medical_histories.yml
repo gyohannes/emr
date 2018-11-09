@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  art_patient: one
+  past_opportunistic_illness: 
+  medications: 
+  known_drug_allergies: 
+
+two:
+  art_patient: two
+  past_opportunistic_illness: 
+  medications: 
+  known_drug_allergies: 

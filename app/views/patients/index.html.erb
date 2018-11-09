@@ -9,14 +9,19 @@
               <div class="col-sm-9">
                 <table width="100%">
                   <tr>
-                    <th><%= f.input :MRN, label: false, placeholder: 'MRN' %></th>
-                    <th><%= f.input :phone_number, label: false, placeholder: 'Phone Number' %></th>
-                    <th><%= f.input :age, as: :string, label: false, placeholder: 'Age' %></th>
-                  </tr>
-                  <tr>
-                    <th><%= f.input :first_name, label: false, placeholder: 'First Name' %></th>
-                    <th><%= f.input :father_name, label: false, placeholder: 'Father Name' %></th>
-                    <th><%= f.input :grand_father_name, label: false, placeholder: 'Grand Father Name' %></th>
+                    <td>
+                      <%= f.input :MRN, label: false, placeholder: 'MRN' %>
+                      <%= f.input :phone_number, label: false, placeholder: 'Phone Number' %>
+                    </td>
+                    <td>
+                      <%= f.input :first_name, label: false, placeholder: 'First Name' %>
+                      <%= f.input :father_name, label: false, placeholder: 'Father Name' %>
+                      <%= f.input :grand_father_name, label: false, placeholder: 'Grand Father Name' %>
+                    </td>
+
+                    <td>
+                      <%= f.input :Gender, collection: ['Male', 'Female'], label: false, prompt: 'Gender' %>
+                      <%= f.input :age, as: :string, label: false, placeholder: 'Age' %></td>
                   </tr>
                 </table>
               </div>
@@ -27,14 +32,10 @@
               </div>
           <% end %>
         </div>
+        <hr/>
+        <div id="patients_list">
+          <%= render 'patients' %>
+        </div>
       </div>
     </div>
 <% end %>
-
-<div class="panel-body">
-  <div id="patients_list">
-    <%= render 'patients' %>
-  </div>
-  <hr/>
-
-</div>

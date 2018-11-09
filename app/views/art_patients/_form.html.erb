@@ -1,33 +1,53 @@
 <%= simple_nested_form_for(@art_patient,html: {id: "wizard_with_validation"}) do |f| %>
-    <h4>ART Enrollment</h4>
-    <fieldset>
-      <%= f.input :enrollment_date,as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
-      <%= f.input :unique_art_number %>
-      <%= f.input :target_population_category %>
-    </fieldset>
     <h4>Patient Identification</h4>
     <fieldset>
       <%= f.simple_fields_for(:patient) do |pf| %>
       <div class='row'>
         <div class="col-sm-6">
+          <%= f.input :enrollment_date,as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
           <%= pf.input :first_name %>
           <%= pf.input :father_name %>
           <%= pf.input :grand_father_name %>
+          <%= pf.input :gender, as: :radio_buttons, item_wrapper_tag: :span, wrapper: 'horizontal_collection', collection: ['Male', 'Female'] %>
+          <%= f.input :target_population_category, collection: ['FSW', 'Long distance drivers', 'Mobile/daily laborers',
+                                                                'Orphans and Vulnerable children (OVC)', 'Children of people living with HIV (PLHIV)',
+                                                                'Partner of PLHIV', 'STI cases', 'General population', 'People in prison',
+                                                                'other most-at-risk populations (MARPs)'] %>
         </div>
         <div class="col-sm-6">
-          <%= pf.input :gender, collection: ['Male', 'Female', 'Unknown'] %>
-          <div class="row">
-            <div class="col-sm-5">
-              <%= pf.input :date_of_birth, label: 'Birth Date', as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
-            </div>
-            <div class="col-sm-1">
-              <label>Age</label>
-            </div>
-            <div class="col-sm-6">
-              <%= pf.input :years, placeholder: 'Years' %>
-              <%= pf.input :months, placeholder: 'Months' %>
-              <%= pf.input :days, placeholder: 'Days' %>
-            </div>
+          <%= pf.input :date_of_birth, label: 'Birth Date', as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+          <% age = AgeDecorator.new(pf.object.age) %>
+          <legend>Age</legend>
+          <table width="100%">
+            <tr>
+              <th>Years</th>
+              <th>Months</th>
+              <th>Days</th>
+            </tr>
+            <tr>
+              <%= pf.simple_fields_for(age) do |a| %>
+                  <td><%= a.number_field :years %></td>
+                  <td><%= a.number_field :months %></td>
+                  <td><%= a.number_field :days %></td>
+              <% end %>
+            </tr>
+          </table><br/>
+          <div id="children_under_5">
+            <legend>For Children < 5 Years</legend>
+            <table width="100%">
+              <tr>
+                <th>Mother's Name</th>
+                <th>Mother's Father Name</th>
+                <th>Mother's Grand Father Name</th>
+              </tr>
+              <tr>
+                <td><%= f.input_field :mother_name %></td>
+                <td><%= f.input_field :mother_father_name %></td>
+                <td><%= f.input_field :mother_grand_father_name %></td>
+              </tr>
+            </table><br/>
+            <%= f.input :place_of_delivery %>
+            <%= f.input :mode_of_delivery %>
           </div>
         </div>
       </div>
@@ -37,14 +57,22 @@
     <h4>Demographic Information</h4>
     <fieldset>
       <%= f.simple_fields_for(:patient) do |pf| %>
-          <%= pf.input :marital_status, collection: ['Single', 'Married', 'Divorced', 'Other'] %>
-          <%= pf.input :education_level, collection: ['Elementary', 'High School', 'Degree','Masters', 'PHD', 'Other'] %>
-          <%= pf.input :religion, collection: ['Catholic', 'Muslim', 'Protestant', 'Orthodox', "Other"] %>
+          <div class="row">
+            <div class="col-sm-4">
+              <%= pf.input :marital_status, as: :radio_buttons, wrapper: 'vertical_collection', collection: ['Single', 'Married', 'Divorced', 'Other'] %>
+            </div>
+            <div class="col-sm-4">
+              <%= pf.input :education_level, as: :radio_buttons, wrapper: 'vertical_collection',collection: ['Elementary', 'High School', 'Degree','Masters', 'PHD', 'Other'] %>
+            </div>
+            <div class="col-sm-4">
+              <%= pf.input :religion, as: :radio_buttons, wrapper: 'vertical_collection',collection: ['Catholic', 'Muslim', 'Protestant', 'Orthodox', "Other"] %>
+            </div>
+          </div><br/>
           <%= pf.input :occupation %>
       <% end %>
     </fieldset>
 
-    <h4>Dependents</h4>
+    <h4>Husband / Wife and Dependent Children</h4>
       <fieldset>
         <%= render partial: 'dependent_fields', locals: {f: f}%>
       </fieldset>
@@ -53,9 +81,11 @@
           <%= f.simple_fields_for(:patient) do |pf| %>
             <div class='row'>
               <div class="col-sm-6">
-                <%= pf.input :organization_structure_id %>
+                <%= pf.input :organization_structure_id, collection: OrganizationStructure.all, label: 'Woreda' %>
                 <%= pf.input :kebele %>
                 <%= pf.input :house_number %>
+                <%= pf.input :residence_type, as: :radio_buttons,  item_wrapper_tag: :span, wrapper: 'horizontal_collection', collection: ['Rural', 'Urban'] %>
+                <%= pf.input :catchment_area, label: 'Patient is With in Catchment Area',wrapper: 'horizontal_collection' %>
               </div>
               <div class="col-sm-6">
                 <%= pf.input :home_telephone %>
@@ -68,7 +98,7 @@
     <h4>Referral Information</h4>
     <fieldset>
       <%= f.simple_fields_for(:referral) do |rf| %>
-          <%= rf.input :referred_from, collection: [['From With-in the Facility','from_with_in'], ['From Outside the Facility','from_outside']] %>
+          <%= rf.input :referred_from, as: :radio_buttons, wrapper: 'horizontal_collection', collection: [['From With-in the Facility','from_with_in'], ['From Outside the Facility','from_outside']] %>
           <div id="referral_info"><%= render 'referred_from' %></div>
       <% end %>
     </fieldset>
@@ -79,11 +109,30 @@
             <div class="col-sm-6">
               <%= cf.input :full_name %>
               <%= cf.input :age %>
-              <%= cf.input :gender %>
-              <%= cf.input :relation %>
+              <%= cf.input :gender,as: :radio_buttons, item_wrapper_tag: :span, wrapper: 'horizontal_collection', collection: ['Male', 'Female'] %>
+              <%= cf.input :relation,collection: ['Husband', 'Wife', 'Father', 'Mother', 'Uncle', 'Aunt', 'Child', 'Other'] %>
             </div>
             <div class="col-sm-6">
-              <%= cf.input :address_same_as_patient, input_html:{class: "filled-in chk-col-pink"} %>
+              <legend>Address</legend>
+              <label><%= cf.check_box :address_same_as_patient %> Address Same as Patient's Address</label><br/><br/>
+              <div id="care_giver_address">
+                <%= cf.input :organization_structure_id, collection: OrganizationStructure.all, label: 'Woreda' %>
+                <%= cf.input :kebele %>
+                <%= cf.input :house_number %>
+              </div>
+              <legend>Telephone Number</legend>
+                  <table width="100%">
+                    <tr>
+                      <th>Home</th>
+                      <th>Mobile</th>
+                      <th>work</th>
+                    </tr>
+                    <tr>
+                      <td><%= cf.input_field :home_telephone, label: false %></td>
+                      <td><%= cf.input_field :mobile_telephone, label: false %></td>
+                      <td><%= cf.input_field :work_telephone, label: false %></td>
+                    </tr>
+                  </table>
             </div>
           </div>
       <% end %>

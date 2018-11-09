@@ -1,12 +1,6 @@
 ﻿(function ($) {
     'use strict';
     $(function () {
-        //iCheck init
-        $('input[type="checkbox"]').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green'
-        });
-
         //Jquery validation
         $('#frmSignin').validate({
             highlight: function (element) {

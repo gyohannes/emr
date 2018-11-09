@@ -1,5 +1,38 @@
-fieldset{
+.js-exportable{
     background: #ffffff;
+}
+.tab-pane{
+    background: #f9f9f9;
+}
+
+.icheckbox_square-blue, .iradio_square-blue {
+    margin-right: 2px;
+}
+.form-check{
+    margin-right: 10px;
+}
+.columned_list > .form-check{
+    float: left;
+    width: 33%;
+}
+.form-control{
+    width: inherit;
+    border: 1px solid #2992a7;
+}
+.wizard .content{
+    overflow: -moz-hidden-unscrollable;
+    background: #f9f9f9;
+    overflow: visible;
+}
+fieldset{
+    background: #f9f9f9;
+}
+.panel.panel-default > .panel-heading {
+    border-color: #2992a7;
+}
+.panel-body{
+    background: #f9f9f9;
+    min-height: 600px;
 }
 .panel-close{
     display: none;

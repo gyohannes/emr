@@ -9,8 +9,8 @@
 //= require facilities
 //= require patients
 //= require art_patients
-//= require referred_from
+//= require art_patients
 //= require highcharts
-//= require chartkick
+//= require referred_from
 //= require AdminBSBSenstive/index
 //= require global

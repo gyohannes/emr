@@ -1,9 +1,15 @@
-<%= simple_fields_for :art_patient,@art_patient do |f|  %>
-    <% if @referred_from == 'from_with_in' %>
-        <%= f.input :department_id, collection: @departments, class: "form-control show-tick" %>
-    <% elsif @referred_from == 'from_outside' %>
-        <%= f.input :outside_referral_type, label: 'Referred Facility Type', collection:
-            ['Health Center', 'Public Hospital','Private Hospital', 'NGO/FBO Hospital',
-             'Private Clinic', 'Self-reffered', 'Community Referred', 'Others', 'Unknown'] %>
+<%= simple_fields_for(:art_patient,@art_patient) do |f| %>
+    <%= f.simple_fields_for(@art_patient.try(:referral) || :referral_attributes) do |rf| %>
+      <% if @referred_from == 'from_with_in' %>
+            <div id="referred_from_department">
+              <%= rf.input :department_id, collection: @departments %>
+            </div>
+      <% elsif @referred_from == 'from_outside' %>
+            <div id="referred_from_referred_type">
+              <%= rf.input :outside_referral_type, label: 'Referred Facility Type', collection:
+                ['Health Center', 'Public Hospital','Private Hospital', 'NGO/FBO Hospital',
+                 'Private Clinic', 'Self-reffered', 'Community Referred', 'Others', 'Unknown'] %>
+            </div>
+      <% end %>
     <% end %>
 <% end %>

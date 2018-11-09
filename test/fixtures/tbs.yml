@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  medical_history: one
+  tb_smear: 
+  tb_tx: 
+  post_treatment_smear: 
+
+two:
+  medical_history: two
+  tb_smear: 
+  tb_tx: 
+  post_treatment_smear: 

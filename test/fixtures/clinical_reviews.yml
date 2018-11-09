@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2018-11-07
+  art_patient: one
+  who_staging: 
+  clinical_review: 
+
+two:
+  date: 2018-11-07
+  art_patient: two
+  who_staging: 
+  clinical_review: 

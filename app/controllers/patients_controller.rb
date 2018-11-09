@@ -15,8 +15,10 @@ class PatientsController < ApplicationController
     grand_father_name = params[:grand_father_name]
     phone_number = params[:phone_number]
     age = params[:age]
-    @art_patients = Patient.search(mrn, art_number, phone_number, age, gender,first_name, father_name, grand_father_name)
-    render partial: 'art_patients'
+    art_number = params[:art_number]
+    gender = params[:gender]
+    @patients = Patient.search(mrn, art_number, phone_number, age, gender,first_name, father_name, grand_father_name)
+    render partial: 'patients'
   end
 
   def create_from_search

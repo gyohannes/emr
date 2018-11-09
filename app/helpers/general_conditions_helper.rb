@@ -1,0 +1,2 @@
+module GeneralConditionsHelper
+end

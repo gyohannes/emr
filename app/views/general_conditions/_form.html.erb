@@ -1,0 +1,62 @@
+<%= simple_nested_form_for(@general_condition,html: {id: "wizard_with_validation"}) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <h4>vital Signs and Anrtopometry and Functional Level</h4>
+    <fieldset>
+    <%= f.input :date, as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+    <%= f.association :art_patient %>
+    <%= f.simple_fields_for(:vital_signs_and_anrtopometry_and_functional_level) do |vaf| %>
+        <%= vaf.simple_fields_for(:vital_signs) do |vf| %>
+            <div class="row">
+              <div class="col-sm-2"><b>V/S</b></div>
+              <div class="col-sm-5">
+                <%= vf.input :temp, label: "Temp (oC)" %>
+                <%= vf.input :pulse, label: "Pulse/HR (/m)" %>
+              </div>
+              <div class="col-sm-5">
+                <%= vf.input :temp, label: "BP (mmgg)" %>
+                <%= vf.input :temp, label: "RR (R/m)" %>
+              </div>
+            </div><hr/>
+            <div class="row">
+              <div class="col-sm-2"><b>Ant.</b></div>
+              <div class="col-sm-5"><%= vf.input :height, label: 'Height (cm)' %></div>
+              <div class="col-sm-5"><%= vf.input :weight, label: 'Weight (kg)' %></div>
+            </div>
+            <hr/>
+            <%= vf.input :functional_status, as: :radio_buttons, item_wrapper_tag: 'span', wrapper: 'horizontal_collection', collection: ['Working', 'Ambulatory', 'Bed ridden'] %>
+        <% end %>
+    <% end %>
+    </fieldset>
+    <h4>Symptom Screen & Pregnancy Status</h4>
+    <fieldset>
+    <%= f.input :symptom_screen, as: :check_boxes, collection: ['Chronic Cough', 'Dyspnea', 'Hemoptysis', 'Chronic Fatigue',
+                                                                'Weight Loss', 'Flu-like (URTI)', 'Night Sweats', 'Fever > 1 Month'] %>
+    <label style="font-size: 21px; border-bottom: 1px solid #e5e5e5; width: 100%">Patient's Pregnancy Status</label><br/><br/>
+    <%= f.simple_fields_for(:pregnancy_status,input_html: {label: "Patient's Pregnancy Status"}) do |pf| %>
+        <%= pf.input :pregnancy_status, as: :radio_buttons, item_wrapper_tag: 'span', collection: ['Pregnant', 'Not Pregnant', 'Not Applicable (Male)'], wrapper: 'horizontal_collection' %>
+        <%= pf.input :edd, as: :string, label: 'If Pregnant: EDD', input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+    <% end %>
+    </fieldset>
+    <h4>General Appearance & Physical Exam</h4>
+    <fieldset>
+      <%= f.input :general_appearance, label: 'General Appearnce of Patient at Presentation' %>
+      <label>Physical Exam</label>
+    <table class="table">
+      <tr>
+        <th>Physical Exam</th>
+        <th>Status</th>
+        <th>Abnormal Findings</th>
+      </tr>
+      <%= f.simple_fields_for :physical_exams do |pef| %>
+              <tr>
+                <td><%= pef.input :physical_exam, as: :hidden %> <%= pef.object.physical_exam %></td>
+                <td><%= pef.input_field :status, label: false, as: :radio_buttons, item_wrapper_tag: 'span', wrapper: 'horizontal_collection', collection: [['Normal',true], ['Abnormal', false]] %></td>
+                <td><%= pef.input :abnormal_findings, label: false %></td>
+              </tr>
+      <% end %>
+        </table>
+    <%= f.input :other_findings %>
+    </fieldset>
+
+<% end %>

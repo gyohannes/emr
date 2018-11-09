@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @clinical_review.date %>
+</p>
+
+<p>
+  <strong>Art patient:</strong>
+  <%= @clinical_review.art_patient %>
+</p>
+
+<p>
+  <strong>Who staging:</strong>
+  <%= @clinical_review.who_staging %>
+</p>
+
+<p>
+  <strong>Clinical review:</strong>
+  <%= @clinical_review.clinical_review %>
+</p>
+
+<%= link_to 'Edit', edit_clinical_review_path(@clinical_review) %> |
+<%= link_to 'Back', clinical_reviews_path %>

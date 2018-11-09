@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @social_assessment.date %>
+</p>
+
+<p>
+  <strong>Art patient:</strong>
+  <%= @social_assessment.art_patient %>
+</p>
+
+<p>
+  <strong>Employment:</strong>
+  <%= @social_assessment.employment %>
+</p>
+
+<p>
+  <strong>Living condition:</strong>
+  <%= @social_assessment.living_condition %>
+</p>
+
+<p>
+  <strong>Supportive care:</strong>
+  <%= @social_assessment.supportive_care %>
+</p>
+
+<p>
+  <strong>Disclosure:</strong>
+  <%= @social_assessment.disclosure %>
+</p>
+
+<p>
+  <strong>Family members:</strong>
+  <%= @social_assessment.family_members %>
+</p>
+
+<p>
+  <strong>Issues:</strong>
+  <%= @social_assessment.issues %>
+</p>
+
+<%= link_to 'Edit', edit_social_assessment_path(@social_assessment) %> |
+<%= link_to 'Back', social_assessments_path %>

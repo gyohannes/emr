@@ -1,0 +1,103 @@
+
+<%= simple_form_for(@social_assessment) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :date, as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+    <%= f.association :art_patient %>
+    <%= f.simple_fields_for :employment do |ef| %>
+        <%= ef.input :current_employment, as: :radio_buttons, collection: ['Working full time','Working part-time','Not working / studying due to ill health', 'Unemployed'] %>
+        <%= ef.input :current_employment, label: 'Other (Specify)' %>
+        <div class="row">
+          <div class="col-sm-4"><%= ef.input :employer_name, label: "Employer's Name" %></div>
+          <div class="col-sm-4"><%= ef.input :department %></div>
+          <div class="col-sm-4"><%= ef.input :position %></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-8"><%= ef.input :does_illness_afect_employment, as: :radio_buttons, collection: [['Yes', true],['No', false]],item_wrapper_tag: 'span',
+                                             wrapper: 'horizontal_collection', label: "Does/Did illnes affect ability to carry this employment / study ?" %></div>
+          <div class="col-sm-4"><%= ef.input :how_often, label: 'If yes: how often' %></div>
+        </div>
+        <%= ef.input :impact_due_to_illness, label: 'If No: is there any impact due to illness?' %>
+        <% end %>
+    <%= f.simple_fields_for :living_conditions do |lf| %>
+        <div class="row">
+          <div class="col-sm-2">Home:</div>
+          <div class="col-sm-4"><%= lf.input :number_of_rooms %></div>
+          <div class="col-sm-3"><%= lf.input :running_water, as: :boolean %></div>
+          <div class="col-sm-3"><%= lf.input :electricity, as: :boolean %></div>
+        </div>
+        <%= lf.input :number_of_people_in_the_household %>
+    <% end %>
+    <%= f.simple_fields_for :supportive_care do |sf| %>
+        <%= sf.input :religious_conviction, as: :radio_buttons, wrapper: 'horizontal_collection', item_wrapper_tag: 'span',
+                   collection: ['Muslim', 'Orthodox', 'Protestant', 'Catholic', 'Other'] %>
+        <%= sf.input :spiritual_caregiver %>
+    <% end %>
+    <%= f.simple_fields_for :disclosure do |sf| %>
+        <%= sf.input :family, as: :check_boxes, wrapper: 'horizontal_collection', item_wrapper_tag: 'span',
+                     collection: ['Wife / Husband', 'Own Child(ren)', 'parent(s)', 'Brother(s)/Sister(s)', 'Other'] %>
+        <%= sf.input :others, as: :check_boxes, wrapper: 'horizontal_collection', item_wrapper_tag: 'span',
+                     collection: ['Relatives', 'Friends'] %>
+    <% end %>
+    <%= f.simple_fields_for :family_members_spouse do |sf| %>
+        <%= sf.input :condition_of_hisband_wife, as: :radio_buttons, wrapper: 'horizontal_collection', item_wrapper_tag: 'span',
+                     collection: ['Healthy', 'Chronic ill', 'Dead', 'Unknown'] %>
+        <%= sf.input :hiv, label: 'HIV', as: :radio_buttons, wrapper: 'horizontal_collection', item_wrapper_tag: 'span',
+                     collection: ['Not Asked', 'Negative', 'Posetive', 'Unknown'] %>
+        <%= sf.input :tb, label: 'TB', as: :radio_buttons, wrapper: 'horizontal_collection', item_wrapper_tag: 'span',
+                     collection: ['Not Asked', 'Negative', 'Posetive', 'Unknown'] %>
+        <div class="row">
+          <div class="col-sm-6">
+            <%= sf.input :arv_treatment, label: 'Was/Is on ARV treatment?', as: :radio_buttons, wrapper: 'horizontal_collection', item_wrapper_tag: 'span',
+                         collection: [['Yes', true], ['No', false]] %>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <%= sf.input :tb_treatment, label: 'Was/Is on TB treatment?', as: :radio_buttons, wrapper: 'horizontal_collection', item_wrapper_tag: 'span',
+                       collection: [['Yes', true], ['No', false]] %>
+        </div>
+    <% end %>
+    <%= f.simple_fields_for :family_members_children do |cf| %>
+        <div class="row">
+          <div class="col-sm-3">
+            <%= sf.input :number_of_children_alive %>
+          </div>
+          <div class="col-sm-3">
+            <%= sf.input :number_hiv_tested, label: 'Number HIV tested' %>
+          </div>
+          <div class="col-sm-3">
+            <%= sf.input :number_positive %>
+          </div>
+          <div class="col-sm-3">
+            <%= sf.input :number_cronically_ill %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3">
+            <%= sf.input :number_of_children_died %>
+          </div>
+          <div class="col-sm-3">
+            <%= sf.input :number_were_hiv_tested, label: 'Number were HIV tested' %>
+          </div>
+          <div class="col-sm-3">
+            <%= sf.input :number_were_positive, label: 'Number were Positive' %>
+          </div>
+          <div class="col-sm-3">
+            <%= sf.input :number_were_cronically_ill %>
+          </div>
+        </div>
+    <% end %>
+    <%= f.simple_fields_for :issues do |isf| %>
+      <%= isf.input :general, as: :check_boxes, collection: ['Concerns about financial issue within the family','Bereavement/Grief',
+                                                             'Concerns about the children','HIV status disclosure concerns',
+                                                             'Concerns regarding marital relationship','Adherence to treatment concerns',
+                                                             'Concerns regarding family relations','Dietary problems', 'Other concerns'] %>
+    <% end %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

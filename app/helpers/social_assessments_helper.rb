@@ -1,0 +1,2 @@
+module SocialAssessmentsHelper
+end

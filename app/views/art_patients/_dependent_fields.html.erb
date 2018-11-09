@@ -1,10 +1,19 @@
-<table id="dependents" width="100%" %>
+<table class="table" id="dependents" width="100%" %>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Relation</th>
+    <th>Age</th>
+    <th>Health Status</th>
+    <th></th>
+  </tr>
+  </thead>
   <%= f.simple_fields_for :dependents, :wrapper => false do |df| %>
       <tr class="fields">
-        <td><%= df.input :name, placeholder: 'Name', label: false %></td>
-        <td><%= df.input :relation, placeholder: 'Relation', label: false %></td>
-        <td><%= df.input :age, placeholder: 'Age', label: false %></td>
-        <td><%= df.input :health_status, placeholder: 'Health Status', label: false %></td>
+        <td><%= df.input_field :name, label: false %></td>
+        <td><%= df.input_field :relation, collection: ['Husband', 'Wife', 'Child'], label: false %></td>
+        <td><%= df.input_field :age, label: false %></td>
+        <td><%= df.input_field :health_status, collection: ['Ill', 'Healthy', 'Died'], label: false %></td>
         <td><%= df.link_to_remove 'Remove' %></td>
       </tr>
   <% end %>

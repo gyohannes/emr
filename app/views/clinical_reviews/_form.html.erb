@@ -1,0 +1,38 @@
+
+<%= simple_form_for(@clinical_review) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :date, as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+    <%= f.association :art_patient %>
+    <%= f.simple_fields_for :who_staging do |wf| %>
+        <%= wf.input :who_stage1_conditions, label: 'Who Stage 1 Conditions', as: :check_boxes,
+                     collection: ['Clinically Asymptomatic Patient', 'Persistent Generalized Lymphadenopathy (PGL)'],wrapper_html: {class: 'columned_list'} %>
+        <%= wf.input :who_stage2_conditions, label: 'Who Stage 2 Conditions', as: :check_boxes,
+                     collection: ['Minor Mucocutaneous Manifestations', 'Herpes Zoster', 'Weight Loss, 10% of Body Weight',
+                     'Recurrent Upper Respiratory Tract Infections'], wrapper_html: {class: 'columned_list'}%>
+        <%= wf.input :who_stage3_conditions, label: 'Who Stage 3 Conditions', as: :check_boxes,
+                     collection: ['Oral Candidiasis', 'Weight Loss, 10% of Body Weight', 'Oral Hairy Leukoplakia', 'Bacterial Pneumonia',
+                     'Unexplained Chronic Diarrhea (> 1 Month)', 'Other Severe Bacterial Infection (i.e Pyomyositis)',
+                                  'Unexplained Prolonged Fever (> 1 Month)','Pulmonary Tuberculosis' ],wrapper_html: {class: 'columned_list'} %>
+        <%= wf.input :who_stage4_conditions, label: 'Who Stage 4 Conditions', as: :check_boxes,
+                     collection: ['Extrapulmonary Tuberculosis', 'HIV Wasting Syndrome'], wrapper_html: {class: 'columned_list'} %>
+    <% end %>
+    <%= f.simple_fields_for :clinical_review do |cf| %>
+        <%= cf.input :evaluation_for_cough_or_tb, label: 'Does the Patient need evaluation for cough or TB?', as: :radio_buttons, item_wrapper_tag: 'span', collection: [['Yes',true],['No',false]] %>
+        <%= cf.input :evaluation_for_cough_or_tb_order, label: 'If Yes:  Order', as: :radio_buttons, wrapper: 'horizontal_collection', item_wrapper_tag: 'span', collection: ['TB Sputum Smear','Empric Antbiotics','Chest X-ray'] %>
+        <%= cf.input :evaluation_for_diarrhea, label: 'Does the Patient need evaluation for diarrhea?', item_wrapper_tag: 'span',as: :radio_buttons, collection: [['Yes',true],['No',false]] %>
+        <%= cf.input :evaluation_for_diarrhea_order, label: 'If Yes Order', as: :radio_buttons, wrapper: 'horizontal_collection', item_wrapper_tag: 'span', collection: ['TB Sputum Smear','Empric Antbiotics','Chest X-ray'] %>
+        <%= cf.input :evaluation_for_fever, label: 'Does the Patient need evaluation for fever?', as: :radio_buttons, item_wrapper_tag: 'span',collection: [['Yes',true],['No',false]] %>
+        <%= cf.input :evaluation_for_fever_order, label: 'If Yes Order', as: :radio_buttons, wrapper: 'horizontal_collection', item_wrapper_tag: 'span',collection: ['TB Sputum Smear','Empric Antbiotics','Chest X-ray'] %>
+        <%= cf.input :evaluation_for_prophylactic_medication, label: 'Does the Patient need prophylactic medication?', item_wrapper_tag: 'span',as: :radio_buttons, collection: [['Yes',true],['No',false]] %>
+        <%= cf.input :evaluation_for_cough_arv, label: 'Does the Patient need evaluation for ARV treatment?', item_wrapper_tag: 'span',as: :radio_buttons, collection: [['Yes',true],['No',false]] %>
+        <%= cf.input :evaluation_for_arv_order, label: 'If Yes Order', as: :radio_buttons, wrapper: 'horizontal_collection', item_wrapper_tag: 'span',collection: ['TB Sputum Smear','Empric Antbiotics','Chest X-ray'] %>
+    <% end %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  general_condition: one
+  physical_exam: MyString
+  status: false
+  abnormal_findings: MyText
+
+two:
+  general_condition: two
+  physical_exam: MyString
+  status: false
+  abnormal_findings: MyText

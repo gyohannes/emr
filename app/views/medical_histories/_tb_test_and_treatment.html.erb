@@ -1,0 +1,41 @@
+<% tb = TBDecorator.new(f.object.tb) %>
+<%= f.simple_fields_for(tb) do |tf| %>
+    <table class="table">
+      <% tb_smear = TBSmearDecorator.new(tf.object.tb_smear) %>
+      <%= tf.simple_fields_for(tb_smear) do |tsf| %>
+          <tr>
+            <th>TB Smear</th>
+            <td>
+              <%= tf.input :date, as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"}, required: false %>
+              <%= tsf.input :health_facility, required: false %>
+            </td>
+            <td>
+              <%= tsf.input :result, required: false, as: :radio_buttons, item_wrapper_tag: :span, wrapper: 'horizontal_collection', collection: ['Not Determined', 'Negative', 'Posetive', 'Post+1', 'Post+2', 'Post+3','Unknown'] %>
+            </td>
+          </tr>
+      <% end %>
+      <% tb_tx = TBTxDecorator.new(tf.object.tb_tx) %>
+      <%= tf.simple_fields_for(tb_tx) do |ttf| %>
+          <tr>
+            <th>TB Tx</th>
+            <td>
+              <%= ttf.input :started, required: false, as: :radio_buttons, item_wrapper_tag: :span, wrapper: 'horizontal_collection', collection: [['Yes',true],['No', false]] %>
+              <%= ttf.input :date_tx_started, required: false, label: 'Date Tx Started',  as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+              <%= ttf.input :regimen, required: false, as: :radio_buttons, item_wrapper_tag: :span, wrapper: 'horizontal_collection', collection: ['Not Determined', '2SRHZ/6EH', '2HRZES/1HRZE/5HRE', '2HRZE/6HE'] %>
+            </td>
+            <td>
+              <%= ttf.input :completed_tx, required: false,  as: :radio_buttons, item_wrapper_tag: :span, wrapper: 'horizontal_collection', collection: [['Yes',true],['No', false]], label: 'Completed Tx' %>
+              <%= ttf.input :date_tx_started, required: false, label: 'Date Tx Completed', as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+            </td>
+          </tr>
+      <% end %>
+      <% post_treatment_smear = PostTreatmentSmearDecorator.new(tf.object.post_treatment_smear) %>
+      <%= tf.simple_fields_for(post_treatment_smear) do |ptsf| %>
+          <tr>
+            <th>Post Treatment Smear</th>
+            <td><%= ptsf.input :sputum_smear_posetive_date, required: false, label: 'Sputum smear + date', as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %></td>
+            <td><%= ptsf.input :sputum_smear_negative_date, required: false, label: 'Smear negative date', as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %></td>
+          </tr>
+      <% end %>
+    </table>
+<% end %>

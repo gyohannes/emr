@@ -1,48 +1,61 @@
   <%= simple_nested_form_for(@patient, html: {id: "wizard_with_validation"}) do |f| %>
-    <h3>Personal Info</h3>
+      <h4>Patient Identification</h4>
       <fieldset>
-        <div class="row">
-          <div class="col-sm-6">
-            <%= f.input :first_name %>
-            <%= f.input :father_name %>
-            <%= f.input :grand_father_name %>
-            <%= f.input :gender, collection: ['Male', 'Female', 'Unknown'] %>
-            <%= f.input :mother_first_name %>
-          </div>
-          <div class="col-sm-6">
-            <div class="row">
+            <div class='row'>
+              <div class="col-sm-6">
+                <%= f.input :first_name %>
+                <%= f.input :father_name %>
+                <%= f.input :grand_father_name %>
+                <%= f.input :gender, as: :radio_buttons, wrapper: 'horizontal_collection', collection: ['Male', 'Female'] %>
+              </div>
               <div class="col-sm-6">
                 <%= f.input :date_of_birth, label: 'Birth Date', as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
-              </div>
-              <div class="col-sm-2">
-                OR <label>Age</label>
-              </div>
-              <div class="col-sm-4">
-                <%= f.input :years, label: false, placeholder: 'Years' %>
-                <%= f.input :months, label: false, placeholder: 'Months' %>
-                <%= f.input :days, label: false, placeholder: 'Days' %>
+                <legend>Age</legend>
+                <table width="100%">
+                  <tr>
+                    <th>Years</th>
+                    <th>Months</th>
+                    <th>Days</th>
+                  </tr>
+                  <tr>
+                    <td><%= f.input_field :years %></td>
+                    <td><%= f.input_field :months %></td>
+                    <td><%= f.input_field :days %></td>
+                  </tr>
+                </table>
               </div>
             </div>
-            <%= f.input :religion %>
-            <%= f.input :education_level, collection: ['Elementary', 'High School', 'Degree','Masters', 'PHD', 'Other'] %>
+      </fieldset>
+
+      <h4>Demographic Information</h4>
+      <fieldset>
+            <div class="row">
+              <div class="col-sm-4">
+                <%= f.input :marital_status, as: :radio_buttons, wrapper: 'vertical_collection', collection: ['Single', 'Married', 'Divorced', 'Other'] %>
+              </div>
+              <div class="col-sm-4">
+                <%= f.input :education_level, as: :radio_buttons, wrapper: 'vertical_collection',collection: ['Elementary', 'High School', 'Degree','Masters', 'PHD', 'Other'] %>
+              </div>
+              <div class="col-sm-4">
+                <%= f.input :religion, as: :radio_buttons, wrapper: 'vertical_collection',collection: ['Catholic', 'Muslim', 'Protestant', 'Orthodox', "Other"] %>
+              </div>
+            </div><br/>
             <%= f.input :occupation %>
-            <%= f.input :marital_status, collection: ['Single', 'Married', 'Divorced', 'Other'] %>
+      </fieldset>
+
+      <h4>Patient Address</h4>
+      <fieldset>
+        <div class='row'>
+          <div class="col-sm-6">
+            <%= f.input :organization_structure_id, collection: OrganizationStructure.all, label: 'Woreda' %>
+            <%= f.input :kebele %>
+            <%= f.input :house_number %>
+          </div>
+          <div class="col-sm-6">
+            <%= f.input :home_telephone %>
+            <%= f.input :mobile_telephone %>
+            <%= f.input :work_telephone %>
           </div>
         </div>
-
-      </fieldset>
-
-    <h3>Address</h3>
-      <fieldset>
-        <%= f.association :organization_structure %>
-        <%= f.input :kebele %>
-        <%= f.input :house_number %>
-        <%= f.input :home_telephone %>
-        <%= f.input :mobile_telephone %>
-        <%= f.input :work_telephone %>
-      </fieldset>
-    <h3>Relatives</h3>
-      <fieldset>
-        <%= render partial: 'relative_fields', locals: {f: f} %>
       </fieldset>
   <% end %>

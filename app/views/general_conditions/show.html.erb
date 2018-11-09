@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @general_condition.date %>
+</p>
+
+<p>
+  <strong>Art patient:</strong>
+  <%= @general_condition.art_patient %>
+</p>
+
+<p>
+  <strong>Vital signs anrtopometry and functional level:</strong>
+  <%= @general_condition.vital_signs_anrtopometry_and_functional_level %>
+</p>
+
+<p>
+  <strong>Symptom screen:</strong>
+  <%= @general_condition.symptom_screen %>
+</p>
+
+<p>
+  <strong>Pregnancy status:</strong>
+  <%= @general_condition.pregnancy_status %>
+</p>
+
+<p>
+  <strong>Physical exam:</strong>
+  <%= @general_condition.physical_exam %>
+</p>
+
+<%= link_to 'Edit', edit_general_condition_path(@general_condition) %> |
+<%= link_to 'Back', general_conditions_path %>

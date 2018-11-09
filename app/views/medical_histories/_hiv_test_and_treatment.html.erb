@@ -1,0 +1,68 @@
+<% hiv = HIVDecorator.new(f.object.hiv) %>
+<%= f.simple_fields_for(hiv) do |hf| %>
+    <table class="table">
+      <% hiv_test = HIVTestDecorator.new(hf.object.hiv_test) %>
+      <%= hf.simple_fields_for(hiv_test) do |htf| %>
+          <tr>
+            <th>HIV Test</th>
+            <td>
+              <%= htf.input :tested, label: false, as: :radio_buttons, item_wrapper_tag: :span, wrapper: 'horizontal_collection', collection: [['Yes',true],['No', false]] %>
+            </td>
+            <td>
+              If Yes
+              <%= htf.input :date, as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+              <%= htf.input :health_facility %>
+            </td>
+          </tr>
+      <% end %>
+      <% arv_rx = ARVRxDecorator.new(hf.object.arv_rx) %>
+      <%= hf.simple_fields_for(arv_rx) do |haf| %>
+          <tr>
+            <th>ARV Rx</th>
+            <td>
+              <%= haf.input :started, label: false,  as: :radio_buttons, item_wrapper_tag: :span, wrapper: 'horizontal_collection', collection: [['Yes',true],['No', false]] %>
+            </td>
+            <td>
+              If Yes
+              <%= haf.input :date, as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+              <div class="row">
+                <div class="col-sm-8"><%= haf.input :length, label: 'Length (Weeks)' %></div>
+                <div class="col-sm-4"><%= haf.input :still_on_treatment, as: :boolean, label: 'Still on Treatment' %></div>
+              </div>
+              <%= haf.input :regimen,as: :radio_buttons, item_wrapper_tag: :span, wrapper: 'horizontal_collection',
+                            collection: ['d4t (30)-3TC-NVP', 'd4t (40)-3TC-NVP', 'd4t (30)-3TC-EFV', 'd4t (40)-3TC-EFV', 'AZT-3TC-NVP', '2nd Line'] %>
+            </td>
+          </tr>
+      <% end %>
+      <% pmtct = PMTCTDecorator.new(hf.object.pmtct) %>
+      <%= hf.simple_fields_for(pmtct) do |hpf| %>
+          <tr>
+            <th>PMTCT</th>
+            <td>
+              <%= hpf.input :given, label: false, as: :radio_buttons, item_wrapper_tag: :span, wrapper: 'horizontal_collection', collection: [['Yes',true],['No', false]] %>
+            </td>
+            <td>
+              If Yes
+              <%= hpf.input :health_facility %>
+              <%= hpf.input :regimen, as: :radio_buttons, item_wrapper_tag: :span, wrapper: 'horizontal_collection', collection: ['Nevirapine', 'Non-Nevirapine'] %>
+              <%= hpf.input :baby_treated %>
+            </td>
+          </tr>
+      <% end %>
+      <% cd4 = CD4Decorator.new(hf.object.cd4) %>
+      <%= hf.simple_fields_for(cd4) do |hcf| %>
+          <tr>
+            <th>CD4</th>
+            <td>
+              <%= hcf.input :'cd4+',  as: :radio_buttons, item_wrapper_tag: :span, wrapper: 'horizontal_collection', collection: [['Yes',true],['No', false]], label: "CD4+" %>
+            </td>
+            <td>
+              If Yes
+              <%= hcf.input :date, as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+              <%= hcf.input :health_facility %>
+              <%= hcf.input :result, label: 'Result (/mm3)' %>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+<% end %>

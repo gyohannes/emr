@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2018-11-07
+  art_patient: one
+  ARV_eleigibility_criteria: 
+  plan: 
+
+two:
+  date: 2018-11-07
+  art_patient: two
+  ARV_eleigibility_criteria: 
+  plan: 

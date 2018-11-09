@@ -1,8 +1,8 @@
-<table class="table table-hover js-exportable dataTable">
+<table class="table table-striped js-exportable dataTable">
   <thead>
   <tr>
-    <th>MRN</th>
     <th>Unique ART Number</th>
+    <th>MRN</th>
     <th>First name</th>
     <th>Father name</th>
     <th>Grand father name</th>
@@ -17,8 +17,14 @@
   <tbody>
   <% @art_patients.each do |patient| %>
       <tr>
+        <td>
+          <% if patient.art_patient.blank? %>
+              <%= link_to "Enrol to ART", new_art_patient_path(patient: patient.id), class: 'btn btn-danger' %>
+          <% else %>
+              <%= patient.art_patient.unique_art_number %>
+          <% end %>
+        </td>
         <td><%= patient.mrn %></td>
-        <td><%= patient.art_patient.try(:unique_art_number)  %></td>
         <td><%= patient.first_name %></td>
         <td><%= patient.father_name %></td>
         <td><%= patient.grand_father_name %></td>
@@ -28,7 +34,7 @@
         <td><%= patient.mobile_telephone %></td>
         <td>
           <%= link_to 'Details', patient %> |
-          <%= link_to 'Edit', edit_patient_path(patient) %> |
+          <%= link_to 'Edit', edit_art_patient_path(patient.art_patient) unless patient.art_patient.blank? %> |
           <%= link_to 'Delete', patient, method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>

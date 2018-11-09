@@ -3,7 +3,7 @@ class Patient < ApplicationRecord
   has_one :art_patient
   has_many :relatives, dependent: :destroy
   store_accessor :telephones, :home_telephone, :mobile_telephone, :work_telephone
-  store_accessor :age, :years, :months, :days
+  #store_accessor :age, :years, :months, :days
 
   validates :first_name, :father_name, :grand_father_name, presence: true
 
@@ -29,6 +29,20 @@ class Patient < ApplicationRecord
     return (list_by_mrn(mrn) + list_by_art_number(art_number) + list_by_first_name(first_name) +
         list_by_father_name(father_name) + list_by_grand_father_name(grand_father_name) +
         list_by_gender(gender) + list_by_phone(phone_number)).uniq
+  end
+
+  def patient_age
+    today  = Date.today
+    unless date_of_birth.blank?
+      diff_in_days = (today - date_of_birth).to_i
+      years = diff_in_days/365
+      diff_in_days = diff_in_days%365
+      months = (diff_in_days/30.42).floor
+      days = (diff_in_days%30.42).floor
+      return [years, months, days]
+    else
+      return nil
+    end
   end
 
 end

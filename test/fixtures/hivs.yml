@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  medical_history: one
+  hiv_test: 
+  arv_rx: 
+  pmtct: 
+  cd4: 
+
+two:
+  medical_history: two
+  hiv_test: 
+  arv_rx: 
+  pmtct: 
+  cd4: 

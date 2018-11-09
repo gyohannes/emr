@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Social Assessments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Art patient</th>
+      <th>Employment</th>
+      <th>Living condition</th>
+      <th>Supportive care</th>
+      <th>Disclosure</th>
+      <th>Family members</th>
+      <th>Issues</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @social_assessments.each do |social_assessment| %>
+      <tr>
+        <td><%= social_assessment.date %></td>
+        <td><%= social_assessment.art_patient %></td>
+        <td><%= social_assessment.employment %></td>
+        <td><%= social_assessment.living_condition %></td>
+        <td><%= social_assessment.supportive_care %></td>
+        <td><%= social_assessment.disclosure %></td>
+        <td><%= social_assessment.family_members %></td>
+        <td><%= social_assessment.issues %></td>
+        <td><%= link_to 'Show', social_assessment %></td>
+        <td><%= link_to 'Edit', edit_social_assessment_path(social_assessment) %></td>
+        <td><%= link_to 'Destroy', social_assessment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Social Assessment', new_social_assessment_path %>

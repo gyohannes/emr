@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  resources :clinical_reviews
+  resources :art_assessment_and_plans
+  resources :social_assessments
+  resources :general_conditions
+  resources :medical_histories
   resources :art_patients do
     collection do
       get 'load_patients'

@@ -2,73 +2,84 @@
   Patient Detials
 </div>
 <div class="panel-body">
-  <h2>Unique ART Number #: &nbsp;&nbsp;&nbsp; <%= @patient.art_patient.unique_art_number rescue nil %></h2>
-  <h2>MRN #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= @patient.mrn %></h2>
+  <table width="100%">
+    <tr>
+      <th><legend>MRN #:&nbsp;&nbsp;&nbsp;&nbsp;<%= @art_patient.patient.mrn %></legend></th>
+      <th><legend>ART #:&nbsp;&nbsp;&nbsp;&nbsp;<%= @art_patient.unique_art_number %></legend></th>
+    </tr>
+  </table>
   <ul class="nav nav-tabs">
-    <li role="presentation" class="active"><a href="#personal_info" data-toggle="tab">Personal Info</a></li>
-    <li role="presentation"><a href="#address" data-toggle="tab">Address</a></li>
-    <li role="presentation"><a href="#relatives" data-toggle="tab">Relatives</a></li>
+    <li role="presentation" class="active"><a href="#patient_identification" data-toggle="tab">Patient Identification</a></li>
+    <li role="presentation"><a href="#demographic_information" data-toggle="tab">Demographic Information</a></li>
+    <li role="presentation"><a href="#patient_address" data-toggle="tab">Patient Address</a></li>
   </ul>
   <div class="tab-content">
-    <div role="tabpanel" class="tab-pane fade in active" id="personal_info">
-      <div class="row">
-        <div class="col-sm-6">
-          <p>
-            <strong>First name:</strong>
-            <%= @patient.first_name %>
-          </p>
-
-          <p>
-            <strong>Father name:</strong>
-            <%= @patient.father_name %>
-          </p>
-
-          <p>
-            <strong>Grand father name:</strong>
-            <%= @patient.grand_father_name %>
-          </p>
-
-          <p>
-            <strong>Mother first name:</strong>
-            <%= @patient.mother_first_name %>
-          </p>
-          <p>
-            <strong>Gender:</strong>
-            <%= @patient.gender %>
-          </p>
-        </div>
-        <div class="col-sm-6">
-
-          <p>
-            <strong>Date of birth:</strong>
-            <%= @patient.date_of_birth %>
-          </p>
-
-          <p>
-            <strong>Religion:</strong>
-            <%= @patient.religion %>
-          </p>
-
-          <p>
-            <strong>Education level:</strong>
-            <%= @patient.education_level %>
-          </p>
-
-          <p>
-            <strong>Occupation:</strong>
-            <%= @patient.occupation %>
-          </p>
-
-          <p>
-            <strong>Marital status:</strong>
-            <%= @patient.marital_status %>
-          </p>
-        </div>
-      </div>
-    </div>
-    <div role="tabpanel" class="tab-pane fade" id="address">
+    <% @patient = @art_patient.patient %>
+    <div role="tabpanel" class="tab-pane fade in active" id="patient_identification">
       <p>
-        <strong>Organization structure:</strong>
+        <label>ART Enrollment Date:</label>
+        <%= @art_patient.enrollment_date %>
+      </p>
+      <p>
+        <label>First name:</label>
+        <%= @patient.first_name %>
+      </p>
+
+      <p>
+        <label>Father name:</label>
+        <%= @patient.father_name %>
+      </p>
+
+      <p>
+        <label>Grand father name:</label>
+        <%= @patient.grand_father_name %>
+      </p>
+
+      <p>
+        <label>Gender:</label>
+        <%= @patient.gender %>
+      </p>
+
+      <p>
+        <label>Target Population Category:</label>
+        <%= @art_patient.target_population_category %>
+      </p>
+
+      <p>
+        <label>Birth Date:</label>
+        <%= @patient.date_of_birth %>
+      </p>
+
+      <p>
+        <label>Age:</label>
+        <%= @patient.patient_age[0] %> Years, <%= @patient.patient_age[1] %> Months and <%= @patient.patient_age[2] %> Days
+      </p>
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="demographic_information">
+      <p>
+        <strong>Marital status:</strong>
+        <%= @patient.marital_status %>
+      </p>
+
+      <p>
+        <strong>Education level:</strong>
+        <%= @patient.education_level %>
+      </p>
+
+      <p>
+        <strong>Religion:</strong>
+        <%= @patient.religion %>
+      </p>
+
+      <p>
+        <strong>Occupation:</strong>
+        <%= @patient.occupation %>
+      </p>
+
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="patient_address">
+      <p>
+        <strong>Woreda:</strong>
         <%= @patient.organization_structure %>
       </p>
 
@@ -96,24 +107,8 @@
         <%= @patient.work_telephone %>
       </p>
     </div>
-    <div role="tabpanel" class="tab-pane fade" id="relatives">
-      <table class="table">
-        <tr>
-          <th>Name</th>
-          <th>Relationship</th>
-          <th>Phone</th>
-        </tr>
-        <% @patient.relatives.each do |r| %>
-            <tr>
-              <td><%= r.name %></td>
-              <td><%= r.relationship %></td>
-              <td><%= r.phone %></td>
-            </tr>
-        <% end %>
-      </table>
-    </div>
     <br/>
-    <%= link_to 'Edit', edit_patient_path(@patient) %> |
-    <%= link_to 'Back', patients_path %>
+    <%= link_to 'Edit', edit_art_patient_path(@art_patient) %> |
+    <%= link_to 'Back', art_patients_path %>
   </div>
 </div>
